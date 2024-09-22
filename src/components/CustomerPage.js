@@ -1,22 +1,39 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../css/Home.css'; // Add your custom styles here
-import { IoLogIn } from "react-icons/io5";
-import { FaCircleUser } from "react-icons/fa6";
+import '../css/CustomerPage.css'; // Import the CSS file for styling
 import { FaHome } from "react-icons/fa";
-import bannerImage from '../images/background.jpg';
+import { FaCartShopping } from "react-icons/fa6";
 
-const Home = ({setLinks}) => {
+import { RiChatHistoryFill } from "react-icons/ri";
+import { FaUser } from "react-icons/fa";
+import { BiSolidContact } from "react-icons/bi";
+import { IoLogOut } from "react-icons/io5";
+
+
+
+
+
+const CustomerPage = ({ setLinks }) => {
   const [restaurants, setRestaurants] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const navigate = useNavigate(); 
+  const [hoveredRestaurantId, setHoveredRestaurantId] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setLinks([{ "title": <><FaHome /> Home</>, "path": "/" },
-      { "title": <><IoLogIn/> LogIn</>, "path": "/login" },
-      { "title": <><FaCircleUser/> Register</>, "path": "/register" }])
+    console.log('Setting links...');
+    setLinks([
+      {title:<><FaHome /> Home</>,path:"/customer-page"},
+      { "title":<>< FaCartShopping /> Cart</>, "path": "/cart" },  // Add Cart link
+      {title:<><RiChatHistoryFill/> OrderHistroy</>,path:"/order-history"},
+   
+      {"title":<><FaUser/> You</>,"path":"user-details"},
+      {"title":<><BiSolidContact />ContactUs</> ,"path":"contact-us"},
+      { "title":<><IoLogOut /> Logout</>, "path": "/" } 
+    ]);
+
     // Fetch restaurants from backend
     axios.get('http://localhost:8081/restaurants/allRestaurants')
       .then(response => {
@@ -39,24 +56,24 @@ const Home = ({setLinks}) => {
     );
   };
 
+  const handleMouseEnter = (restaurantId) => {
+    setHoveredRestaurantId(restaurantId);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredRestaurantId(null);
+  };
+
   const handleRestaurantClick = (restaurantId) => {
-    navigate(`/category-owner/${restaurantId}?from=home`);
+    let user = localStorage.getItem("user");
+    let userObj = JSON.parse(user)
+    let userRole = userObj.userRole 
+    userRole == "CUSTOMER" ? navigate(`/category-customer/${restaurantId}`) : navigate(`/category-owner/${restaurantId}`)
   };
 
   return (
-    <div className="home-container">
+    <div className="customer-page">
       <h1>Restaurants</h1>
-
-      <img 
-        src={bannerImage}
-        alt="Banner"
-        className="banner-image" 
-      />
-      <div className="banner-text">
-    <h1>Welcome to RestroWheels</h1>
-    <p>Discover The Best Places To Eat In Town</p>
-  </div>
-
       <input
         type="text"
         placeholder="Search for restaurants..."
@@ -80,7 +97,9 @@ const Home = ({setLinks}) => {
               <div 
                 key={restaurantId} 
                 className="restaurant-item"
-                onClick={() => handleRestaurantClick(restaurantId)} 
+                onMouseEnter={() => handleMouseEnter(restaurantId)}
+                onMouseLeave={handleMouseLeave}
+                onClick={() => handleRestaurantClick(restaurantId)} // Add click handler
               >
                 <img
                   src={imageUrl}
@@ -93,6 +112,10 @@ const Home = ({setLinks}) => {
                 <h2>{restaurant.restaurantName}</h2>
                 <p>{restaurant.restaurantDescription}</p>
                 <p>{restaurant.restaurantAddress}</p>
+                {hoveredRestaurantId === restaurantId && (
+                  <div className="category-preview">
+                  </div>
+                )}
               </div>
             );
           })
@@ -104,5 +127,4 @@ const Home = ({setLinks}) => {
   );
 };
 
-export default Home;
-
+export default CustomerPage;

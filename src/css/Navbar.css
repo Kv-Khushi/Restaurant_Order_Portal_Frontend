@@ -1,108 +1,58 @@
 /* Navbar Styles */
 .navbar {
-    width: calc(100% - 20px);
-    background-color: rgb(40, 40, 49);
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed; /* Fix the navbar at the top */
-    top: 0;
-    left: 0;
-    z-index: 1000; /* Ensure it stays above other content */
-  }
-  
-  .navbar-logo {
-    color: #fff;
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .navbar-links {
-    list-style-type: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navbar-links li {
-    margin-left: 20px;
-  }
-  
-  .navbar-links a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 18px;
-    position: relative; /* Position relative for absolute children */
-  }
-  
-  .navbar-links a:hover {
-    color: #ddd;
-  }
-  
-  /* Main Container Styles */
-  .App {
-    text-align: center;
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 60px); /* Adjust height to account for navbar */
-    position: relative; /* Ensure it positions relative to the .App container */
-  }
-  
-  /* Forms Overlay Styles */
-  .form-container {
-    max-width: 600px;
-    margin: 20px 0;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
-    position: absolute; /* Position absolutely to overlay */
-    top: 10%; /* Adjust as needed */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none; /* Initially hide the forms */
-    background-color: #fff;
-  }
-  
-  .show-form {
-    display: block; /* Show form when the class is added */
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    margin: 10px 0;
-  }
-  
-  input, select {
-    padding: 10px;
-    margin-top: 5px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  button {
-    padding: 10px;
-    background-color: #4e3de7;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #3d2ae5;
-  }
-  
-  .error {
-    color: red;
-  }
-  
+  width: 100%; /* Full width of the viewport */
+  background-color: rgb(255, 191, 0) !important;
+  padding: 20px; /* Adjust padding to fit content */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed; /* Fix the navbar at the top */
+  top: 0;
+  left: 0;
+  box-sizing: border-box; /* Include padding and border in width calculation */
+  z-index: 1000; /* Ensure it stays above other content */
+}
+
+.navbar-logo {
+  color: #fff;
+  font-size: 34px;
+  font-weight: bold;
+}
+
+.navbar-links {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li {
+  margin-left: 20px;
+}
+
+.navbar-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.navbar-links a:hover {
+  color: #ddd;
+}
+
+/* Ensure content below the navbar is not hidden */
+body {
+  margin: 0; /* Remove default body margin */
+  padding-top: 80px; /* Add padding-top equal to the height of the navbar */
+}
+
+/* Adjusting container and content below navbar */
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px); /* Adjust height to account for navbar */
+  position: relative; /* Ensure it positions relative to the .App container */
+}

@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import { registerUser } from '../services/userService';
+import base64 from 'base-64';
 import '../css/RegisterForm.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegistrationForm() {
   const [formData, setFormData] = useState({
-    userId: '',
     phoneNumber: '',
     userName: '',
     userEmail: '',
     userPassword: '',
+    confirmPassword: '',
     userRole: ''
   });
 
   const [validationErrors, setValidationErrors] = useState({});
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate(); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,24 +29,29 @@ export default function RegistrationForm() {
 
     // Phone number validation
     if (!/^\d{10}$/.test(formData.phoneNumber)) {
-      errors.phoneNumber = 'Phone number should be exactly 10 digits';
+      errors.phoneNumber = 'Invalid Phone Number';
     }
 
     // Username validation
-    if (!formData.userName || formData.userName.length < 2) {
-      errors.userName = 'Username should have at least 2 characters';
+    if (!formData.userName || formData.userName.trim().length < 2) {
+      errors.userName = 'Invalid User Name';
     }
 
     // Email validation
     const emailRegex = /^[A-Za-z0-9._%+-]+@nucleusteq\.com$/;
     if (!formData.userEmail || !emailRegex.test(formData.userEmail)) {
-      errors.userEmail = 'Email must end with nucleusteq.com and be valid';
+      errors.userEmail = 'Email must end with nucleusteq.com';
     }
 
     // Password validation
     const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$/;
     if (!formData.userPassword || !passwordRegex.test(formData.userPassword)) {
-      errors.userPassword = 'Password must be at least 8 characters long and contain at least one digit, one lowercase letter, one uppercase letter, and one special character (@#$%^&+=)';
+      errors.userPassword = 'Use Strong Password';
+    }
+
+    // Confirm Password validation
+    if (formData.userPassword !== formData.confirmPassword) {
+      errors.confirmPassword = 'Passwords do not match';
     }
 
     // User role validation
@@ -62,10 +71,26 @@ export default function RegistrationForm() {
     }
 
     try {
-      await registerUser(formData);
-      alert('Registration successful!');
+      // Encode the password to Base64
+      const encodedPassword = base64.encode(formData.userPassword);
+      const { confirmPassword, ...dataToSend } = formData; // Exclude confirmPassword
+      const dataWithEncodedPassword = { ...dataToSend, userPassword: encodedPassword }; // Add encoded password
+
+      await registerUser(dataWithEncodedPassword);
+     
+      setError(null); // Clear any previous errors
+      navigate('/login'); 
     } catch (err) {
-      setError(err.response.data.message || 'An error occurred');
+      if (err.response && err.response.status === 409) {
+        setValidationErrors({
+          ...validationErrors,
+          userEmail: 'Email already registered' // Add email error to validationErrors
+        });
+        console.log(validationErrors);
+      } else {
+        setError(err.response?.data?.message || 'An error occurred');
+      }
+     
     }
   };
 
@@ -109,7 +134,8 @@ export default function RegistrationForm() {
             required
           />
           {validationErrors.userEmail && (
-            <span className="error">{validationErrors.userEmail}</span>
+          <span className="error" style={{ color: 'red' }}>{validationErrors.userEmail}</span>
+
           )}
         </label>
         <label>
@@ -123,6 +149,19 @@ export default function RegistrationForm() {
           />
           {validationErrors.userPassword && (
             <span className="error">{validationErrors.userPassword}</span>
+          )}
+        </label>
+        <label>
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+          />
+          {validationErrors.confirmPassword && (
+            <span className="error">{validationErrors.confirmPassword}</span>
           )}
         </label>
         <label>

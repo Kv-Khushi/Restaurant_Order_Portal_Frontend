@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/users'; // Update with your actual backend URL
+const API_URL = 'http://localhost:8080/users'; 
 
 export const registerUser = async (userData) => {
   try {
@@ -15,7 +15,9 @@ export const registerUser = async (userData) => {
 export const loginUser = async (userData) => {
   try {
     const response = await axios.post(`${API_URL}/loginUser`, userData);
+   
     return response.data;
+    
   } catch (error) {
     throw error;
   }

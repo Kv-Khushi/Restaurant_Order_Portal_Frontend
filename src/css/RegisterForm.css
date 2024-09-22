@@ -10,6 +10,7 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #f9f9f9;
+  
   }
   
   .formContainer h2 {
@@ -24,7 +25,7 @@
   
   label {
     display: block;
-    margin-bottom: 15px; /* Add margin to separate form fields */
+    margin-bottom: 15px;
     width: 100%;
   }
   
@@ -37,28 +38,29 @@
   }
   
   input:focus, select:focus {
-    border-color: #4e3de7;
+    border-color: rgb(255, 202, 79);
     outline: none;
   }
   
   button {
     width: 100%;
     padding: 10px;
-    background-color: #4e3de7;
+    background-color: rgb(255, 191, 0) !important; 
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-  }
+}
   
   button:hover {
-    background-color: #3d2ae5;
+    background-color: rgb(213, 202, 79);;
   }
   
   .error {
     color: red;
-    font-size: 14px;
+    display: block;
+    text-align: left;
     margin-top: 5px;
   }
   

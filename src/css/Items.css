@@ -1,0 +1,136 @@
+
+.items-page {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.add-food-item-button {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.add-food-item-button button {
+  padding: 12px 24px;
+  background-color: #5A67D8;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-food-item-button button:hover {
+  background-color: #434190;
+  transform: translateY(-2px);
+}
+
+
+.items-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+  margin-top: 20px;
+}
+
+.item-card {
+  background-color: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 15px;
+
+  box-sizing: border-box;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.item-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.item-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.item-info {
+  flex-grow: 1;
+}
+
+.item-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #2D3748;
+  font-weight: 600;
+}
+
+.item-card p {
+  font-size: 14px;
+  color: #4A5568;
+  margin-bottom: 10px;
+}
+
+.item-card .item-price {
+  font-size: 16px;
+  color: #48BB78;
+  font-weight: bold;
+}
+
+.item-card .item-description {
+  font-size: 14px;
+  color: #718096;
+  margin-bottom: 15px;
+}
+
+.item-card .item-description p {
+  margin: 0;
+}
+
+
+.item-card-footer {
+  margin-top: auto;
+}
+
+
+.modal {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-button {
+  background: #4e3de7;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form{
+  margin-left: 1.7em;
+}

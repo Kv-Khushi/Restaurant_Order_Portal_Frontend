@@ -1,0 +1,108 @@
+
+.user-detail-page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.user-detail {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.user-detail p {
+  margin: 10px 0;
+}
+
+.user-detail p strong {
+  color: #333;
+}
+
+.user-detail:hover {
+  transform: scale(1.05); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+
+
+.address-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  width: 400px; 
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; 
+  transition: opacity 0.3s ease;
+}
+
+.address-form div {
+  margin-bottom: 15px;
+}
+
+.address-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.address-form input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.address-form input.error {
+  border-color: red;
+}
+
+.address-form button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.address-form button:hover {
+  background-color: #0056b3;
+}
+
+.address-form span.error {
+  display: block;
+  color: red;
+  font-size: 0.875rem;
+}
+
+.address-form .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.address-form .close-btn svg {
+  width: 20px;
+  height: 20px;
+  color: #333;
+}
+
+.error-message{
+  color: red;
+  margin-right: 13em;
+  font-size: small;
+}
+
+
+.cancel{
+  width: 1em;
+}
