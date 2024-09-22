@@ -98,3 +98,12 @@
 .checkout-button:hover {
   background-color: #0056b3;
 }
+
+.error-message {
+  color: rgb(225, 81, 81);
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1rem !important; 
+  text-align: right !important; 
+
+}

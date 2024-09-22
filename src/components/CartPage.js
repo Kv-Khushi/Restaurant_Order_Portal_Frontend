@@ -19,6 +19,8 @@ const CartPage = ({ setLinks }) => {
     address: '',
   });
   const [addresses, setAddresses] = useState([]);
+  const [orderErrorMessage, setOrderErrorMessage] = useState('');
+
 
   useEffect(() => {
     setLinks([
@@ -82,8 +84,11 @@ const CartPage = ({ setLinks }) => {
         console.error('User ID or Address ID is missing');
       }
     } catch (error) {
-      console.error('Error placing order:', error);
+      if (error.response && error.response.data && error.response.data.message) {
+        
+        setOrderErrorMessage(error.response.data.message);
     }
+  }
   };
 
   const handleDeleteItem = async (foodItemId) => {
@@ -96,6 +101,8 @@ const CartPage = ({ setLinks }) => {
 
       // Update the state to remove the deleted item from cartItems
       setCartItems(prevItems => prevItems.filter(item => item.foodItemId !== foodItemId));
+
+      setOrderErrorMessage('');
     } catch (error) {
       console.error('Error removing item from cart:', error);
     }
@@ -167,6 +174,7 @@ const CartPage = ({ setLinks }) => {
         </label>
 
         <button onClick={handlePlaceOrder}>Place Order</button>
+        {orderErrorMessage && <p className="error-message">{orderErrorMessage}</p>}
       </div>
     </div>
   );
